@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+  <link rel="stylesheet" href="{% static 'mychat/styles.css' %}" />
+{% endblock %}
+{% block content %}
+  <form action="" method="POST">
+    {% csrf_token %}
+
+    <div class="form-control">
+      {{ form.question.label_tag }}
+      {{ form.question }}
+    </div>
+    
+    <button type="submit">Send</button>
+  </form>
+{% endblock %}

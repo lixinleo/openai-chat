@@ -1,0 +1,4 @@
+chat/__pycache__/*
+mychat/__pycache__/*
+mychat/migrations/__pycache__/*
+.env

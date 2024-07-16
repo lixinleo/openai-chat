@@ -1,0 +1,10 @@
+body {
+    font-family: sans-serif;
+    margin: 0;
+}
+
+#content {
+    margin: 3rem auto;
+    width: 90%;
+    max-width: 60rem;
+}

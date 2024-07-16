@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+  <link rel="stylesheet" href="{% static 'mychat/answer.css' %}" />
+{% endblock %}
+
+{% block content %}
+  <div id="content">
+    <h2>Your question</h2>
+    <p>{{ question }}</p>
+    
+    <h2>Answer from AI</h2>
+    <p>{{ answer|linebreaks }}</p>
+
+    <h2><a href="/mychat/">Ask another question</a></h2>
+  </div>
+{% endblock %}
