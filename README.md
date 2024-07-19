@@ -12,5 +12,6 @@
 ## run docker container
 ```docker run -it -p 8000:8000 mychat-app```
 
-## go to: http://localhost:8000/mychat
+## go to gpt4: http://localhost:8000/mychat
 
+## go to gpt3: http://localhost:8000/mychat/gpt3
