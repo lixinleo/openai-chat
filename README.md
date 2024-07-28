@@ -7,11 +7,11 @@
 ```api_key="sk-proj-mZqgeW6JmcYAT3w4KIDpT3Bfdsfdfhsdhfhdsfhdsfhfh"```
 
 ## build image
-```docker build -t mychat-app .  ```
+```docker build --no-cache -t mychat-app .  ```
 
 ## run docker container
-```docker run -it -p 8000:8000 mychat-app```
+```docker run -it -p 8066:8066 mychat-app```
 
-## go to gpt4: http://localhost:8000/mychat
+## go to gpt4: http://localhost:8066/mychat
 
-## go to gpt3: http://localhost:8000/mychat/gpt3
+## go to gpt3: http://localhost:8066/mychat/gpt3
