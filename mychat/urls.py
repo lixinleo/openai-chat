@@ -3,5 +3,5 @@ from . import views
 
 urlpatterns = [
     path("", views.index, name="my-index"),
-    path("gpt3", views.gpt3),
+    path("gpt3", views.gpt3, name="gpt3"),
 ]

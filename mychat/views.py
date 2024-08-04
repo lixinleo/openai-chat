@@ -31,7 +31,7 @@ def gpt3(request):
             print("not valid send me haha")
     else:
         form = ChatForm()
-        return render(request, "mychat/index.html", {
+        return render(request, "mychat/gpt3.html", {
             "form": form
         })
     
