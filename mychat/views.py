@@ -2,13 +2,12 @@ from django.shortcuts import render
 from .forms import ChatForm
 from openai import OpenAI
 import os
+import markdown
 
 # Create your views here.
 def gpt3(request):
-    print("gpt3")
     if request.method == "POST":
         form = ChatForm(request.POST)
-        
         
         if form.is_valid():
             # set up an open api client
@@ -38,7 +37,6 @@ def gpt3(request):
 
 # Create your views here.
 def index(request):
-    print("gpt4")
     if request.method == "POST":
         form = ChatForm(request.POST)
         
@@ -54,10 +52,15 @@ def index(request):
                     ],
                 n=1,
             )
+            
+            # get answer and convert it using markdown libray
+            answer = completion.choices[0].message.content
+            md = markdown.Markdown(extensions=["fenced_code"])
+            answer = md.convert(answer)
 
             return render(request, "mychat/answer.html", {
                 "question" : form.cleaned_data['question'],
-                "answer": completion.choices[0].message.content,
+                "answer": answer,
                 "uri": "/mychat/",
             })
         else:

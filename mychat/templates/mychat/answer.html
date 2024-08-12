@@ -11,7 +11,7 @@
     <p>{{ question }}</p>
     
     <h2>Answer from AI</h2>
-    <p>{{ answer|linebreaks }}</p>
+    <p>{{ answer|safe }}</p>
 
     <h2><a href="{{uri}}">Ask another question</a></h2>
   </div>
