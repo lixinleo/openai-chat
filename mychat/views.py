@@ -14,16 +14,23 @@ def gpt3(request):
             client = OpenAI(api_key=os.getenv("api_key"))
             
             # use open api completion api to get ans
-            res = client.completions.create(
-                model="gpt-3.5-turbo-instruct",
-                prompt=form.cleaned_data['question'],
-                max_tokens=300,
-                temperature=0,
+            completion = client.chat.completions.create(
+                model="gpt-4o-mini",
+                messages=[
+                    {"role": "system", "content": "You are a helpful assistant."},
+                    {"role": "user", "content": form.cleaned_data['question']}
+                    ],
+                n=1,
             )
+
+            # get answer and convert it using markdown libray
+            answer = completion.choices[0].message.content
+            md = markdown.Markdown(extensions=["fenced_code"])
+            answer = md.convert(answer)
             
             return render(request, "mychat/answer.html", {
                 "question" : form.cleaned_data['question'],
-                "answer": res.choices[0].text,
+                "answer": answer,
                 "uri": "/mychat/gpt3",
             })
         else:
@@ -45,14 +52,13 @@ def index(request):
             client = OpenAI(api_key=os.getenv("api_key"))
           
             completion = client.chat.completions.create(
-                model="gpt-4o-mini",
+                model="o1-mini",
                 messages=[
-                    {"role": "system", "content": "You are a helpful assistant."},
                     {"role": "user", "content": form.cleaned_data['question']}
                     ],
                 n=1,
             )
-            
+
             # get answer and convert it using markdown libray
             answer = completion.choices[0].message.content
             md = markdown.Markdown(extensions=["fenced_code"])
