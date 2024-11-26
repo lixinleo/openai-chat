@@ -32,6 +32,7 @@ def gpt3(request):
                 "question" : form.cleaned_data['question'],
                 "answer": answer,
                 "uri": "/mychat/gpt3",
+                "model": "gpt-4o-mini",
             })
         else:
             print("not valid send me haha")
@@ -68,6 +69,7 @@ def index(request):
                 "question" : form.cleaned_data['question'],
                 "answer": answer,
                 "uri": "/mychat/",
+                "model": "o1-mini",
             })
         else:
             print("not valid send me haha")
