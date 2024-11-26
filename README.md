@@ -12,6 +12,6 @@
 ## run docker container
 ```docker run -it -p 8066:8066 mychat-app```
 
-## go to gpt4: http://localhost:8066/mychat
+## go to o1-mini: http://localhost:8066/mychat
 
-## go to gpt3: http://localhost:8066/mychat/gpt3
+## go to gpt4: http://localhost:8066/mychat/gpt4

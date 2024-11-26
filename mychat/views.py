@@ -5,7 +5,7 @@ import os
 import markdown
 
 # Create your views here.
-def gpt3(request):
+def gpt4(request):
     if request.method == "POST":
         form = ChatForm(request.POST)
         
@@ -31,14 +31,14 @@ def gpt3(request):
             return render(request, "mychat/answer.html", {
                 "question" : form.cleaned_data['question'],
                 "answer": answer,
-                "uri": "/mychat/gpt3",
+                "uri": "/mychat/gpt4",
                 "model": "gpt-4o-mini",
             })
         else:
             print("not valid send me haha")
     else:
         form = ChatForm()
-        return render(request, "mychat/gpt3.html", {
+        return render(request, "mychat/gpt4.html", {
             "form": form
         })
     
