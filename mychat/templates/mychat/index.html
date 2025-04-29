@@ -5,17 +5,12 @@
   <link rel="stylesheet" href="{% static 'mychat/styles.css' %}" />
 {% endblock %}
 {% block content %}
-  <div class="nav">
-    <ul>
-      <li>
-        <a href="{% url 'gpt4' %}">Use gpt-4o-mini model</a>
-      </li>
-    </ul>
-  </div>
+  
   <form action="" method="POST">
-    <p>o1-mini model</p>
+    
     {% csrf_token %}
-
+    <div class="form-control">{{ form.model.label_tag }}
+      {{ form.model }}</div>
     <div class="form-control">{{ form.question.label_tag }}
       {{ form.question }}</div>
 
