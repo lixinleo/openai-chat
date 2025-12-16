@@ -11,7 +11,6 @@ class ChatForm(forms.Form):
     )
     model = forms.ChoiceField(
         choices=[
-            ('o1-mini', 'o1-mini'),
             ('o4-mini', 'o4-mini')
         ],
         widget=forms.Select(attrs={
