@@ -12,16 +12,27 @@ def index(request):
         if form.is_valid():
             # set up an open api client
             client = OpenAI(api_key=os.getenv("api_key"))
-            completion = client.chat.completions.create(
-                model=form.cleaned_data['model'],
-                messages=[
-                    {"role": "user", "content": form.cleaned_data['question']}
-                    ],
-                n=1,
-            )
+            model=form.cleaned_data['model']
 
-            # get answer and convert it using markdown libray
-            answer = completion.choices[0].message.content
+            if model == 'gpt-5.3-codex':
+                response = client.responses.create(
+                                model="gpt-5.3-codex",
+                                instructions="You are a coding assistant.",
+                                input=form.cleaned_data['question'],
+                            )
+
+                answer = (response.output_text)
+            else:
+                completion = client.chat.completions.create(
+                    model=model,
+                    messages=[
+                        {"role": "user", "content": form.cleaned_data['question']}
+                        ],
+                    n=1,
+                )
+
+                # get answer and convert it using markdown libray
+                answer = completion.choices[0].message.content
             md = markdown.Markdown(extensions=["fenced_code"])
             answer = md.convert(answer)
 
