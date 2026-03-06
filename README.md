@@ -10,6 +10,6 @@
 ```docker build --no-cache -t mychat-app .  ```
 
 ## run docker container
-```docker run -it -p 8066:8066 mychat-app```
+```docker run -d -it -p 8066:8066 mychat-app```
 
 ## go to http://localhost:8066/mychat
