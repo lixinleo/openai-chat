@@ -1,15 +1,36 @@
-# about this openai-chat project
-1. use Python Django as framework to create this simple chat web application
-2. use openai-python library to make open ai api call to answer users' question
+# OpenAI Chat Project
 
-# to run using docker file
-## create a .env file with your openai api key.
-```api_key="sk-proj-mZqgeW6JmcYAT3w4KIDpT3Bfdsfdfhsdhfhdsfhdsfhfh"```
+A simple chat web application built with Python Django and OpenAI API.
 
-## build image
-```docker build --no-cache -t mychat-app .  ```
+## About
 
-## run docker container
-```docker run -d -it -p 8066:8066 mychat-app```
+- **Framework**: Python Django
+- **API**: OpenAI Python library for API calls
 
-## go to http://localhost:8066/mychat
+## Quick Start with Docker
+
+### 1. Create a `.env` file
+
+Add your OpenAI API key:
+```
+api_key="sk-proj-mZqgeW6JmcYAT3w4KIDpT3Bfdsfdfhsdhfhdsfhdsfhfh"
+```
+
+### 2. Build the Docker image
+
+```bash
+docker build --no-cache -t mychat-app .
+```
+
+### 3. Run the container
+
+```bash
+docker run -d -it -p 8066:8066 mychat-app
+```
+
+### 4. Access the application
+
+Open your browser and navigate to:
+```
+http://localhost:8066/mychat
+```
