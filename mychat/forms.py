@@ -3,7 +3,7 @@ from django import forms
 class ChatForm(forms.Form):
     question = forms.CharField(
         widget=forms.Textarea(attrs={
-        "rows":"10", 
+        "rows":"30", 
         "placeholder": "your question",
         "autofocus":True
         }),

@@ -2,17 +2,37 @@
 {% load static %}
 
 {% block style %}
-  <link rel="stylesheet" href="{% static 'mychat/answer.css' %}" />
+<link rel="stylesheet" href="{% static 'mychat/answer.css' %}" />
 {% endblock %}
 
 {% block content %}
-  <div id="content">
+
+
+<div id="content">
+  <button id="copyBtn" onclick="copyContent()">Copy Question and Answer</button>
+  <div id="answer-section">
     <h2>Your question</h2>
     <p>{{ question }}</p>
-    
+
     <h2>Answer from AI ({{model}})</h2>
     <p>{{ answer|safe }}</p>
-
-    <h2><a href="{{uri}}">Ask another question</a></h2>
   </div>
+
+  <h2><a href="{{uri}}">Ask another question</a></h2>
+</div>
+
+<script>
+  function copyContent() {
+    const contentDiv = document.getElementById('answer-section');
+    const text = contentDiv.innerText;
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = document.getElementById('copyBtn');
+      const originalText = btn.innerText;
+      btn.innerText = 'Copied!';
+      setTimeout(() => {
+        btn.innerText = originalText;
+      }, 2000);
+    });
+  }
+</script>
 {% endblock %}
