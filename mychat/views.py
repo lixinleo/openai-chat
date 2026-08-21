@@ -36,10 +36,9 @@ def index(request):
             md = markdown.Markdown(extensions=["fenced_code"])
             answer = md.convert(answer)
 
-            return render(request, "mychat/answer.html", {
-                "question" : form.cleaned_data['question'],
+            return render(request, "mychat/index.html", {
+                "form": form,
                 "answer": answer,
-                "uri": "/mychat/",
                 "model": form.cleaned_data['model'],
             })
         else:

@@ -3,6 +3,7 @@
 
 {% block style %}
   <link rel="stylesheet" href="{% static 'mychat/styles.css' %}" />
+  <link rel="stylesheet" href="{% static 'mychat/answer.css' %}" />
   <style>
     .overlay {
       display: none;
@@ -56,10 +57,34 @@
       {{ form.question }}</div>
 
     <button type="submit">Send</button>
+    <button type="button" id="clearBtn" onclick="clearContent()">Clear</button>
   </form>
+{% if answer %}
+<div id="content">
+  <button id="copyBtn" onclick="copyContent()">Append Answer to Question</button>
+  <div id="answer-section">
+    <h2>Answer from AI ({{ model }})</h2>
+    <p>{{ answer|safe }}</p>
+  </div>
+</div>
+{% endif %}
+
 <script>
   document.getElementById('chatForm').addEventListener('submit', function () {
     document.getElementById('overlay').classList.add('active');
   });
+
+  function copyContent() {
+    const contentDiv = document.getElementById('answer-section');
+    const text = contentDiv.innerText;
+    const questionField = document.getElementById('id_question');
+    questionField.value = questionField.value ? questionField.value + '\n' + text : text;
+    contentDiv.innerHTML = '';
+    document.getElementById('copyBtn').style.display = 'none';
+  }
+
+  function clearContent() {
+    window.location.href = window.location.pathname;
+  }
 </script>
 {% endblock %}
