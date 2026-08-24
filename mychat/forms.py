@@ -19,9 +19,9 @@ class ChatForm(forms.Form):
     model = forms.ChoiceField(
         choices=[
             ('gpt-5.3-codex', 'gpt-5.3-codex'),
-            ('o4-mini', 'o4-mini'),
-            ('gpt-5-mini', 'gpt-5-mini'),
-            ('gpt-5.5', 'gpt-5.5')
+            ('gpt-5.5', 'gpt-5.5'),
+            ('gpt-5.6-terra', 'gpt-5.6-terra'),
+            ('gpt-5.6-sol', 'gpt-5.6-sol'),
         ],
         widget=forms.Select(attrs={
             "class": "form-select"
