@@ -10,7 +10,7 @@ class ChatForm(forms.Form):
 
     question = forms.CharField(
         widget=forms.Textarea(attrs={
-            "rows": "30",
+            "rows": "12",
             "placeholder": "your question",
             "autofocus": True
         }),
