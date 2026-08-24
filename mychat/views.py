@@ -7,7 +7,7 @@ import markdown
 # Create your views here.
 def index(request):
     if request.method == "POST":
-        form = ChatForm(request.POST)
+        form = ChatForm(request.POST, request=request)
         
         if form.is_valid():
             # set up an open api client
@@ -44,7 +44,7 @@ def index(request):
         else:
             print("not valid send me haha")
     else:
-        form = ChatForm()
+        form = ChatForm(request=request)
         return render(request, "mychat/index.html", {
             "form": form
         })

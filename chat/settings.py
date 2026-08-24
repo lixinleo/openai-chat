@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -29,7 +30,13 @@ SECRET_KEY = 'django-insecure-m%2(-#6@h4j9(5@x9q)a&190!oav4s5bm*ooptwr8iz4)3@l0v
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "localhost",
+    "127.0.0.1",
+]
+
+if my_lan_ip := os.getenv("my_lan_ip"):
+    ALLOWED_HOSTS.append(my_lan_ip)
 
 
 # Application definition

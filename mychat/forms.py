@@ -1,13 +1,20 @@
 from django import forms
+import re
 
 class ChatForm(forms.Form):
+    def __init__(self, *args, request=None, **kwargs):
+        super().__init__(*args, **kwargs)
+        user_agent = request.META.get("HTTP_USER_AGENT", "") if request else ""
+        if re.search(r"iphone|ipad|ipod|android|mobile", user_agent, re.IGNORECASE):
+            self.fields["question"].widget.attrs["rows"] = "10"
+
     question = forms.CharField(
         widget=forms.Textarea(attrs={
-        "rows":"30", 
-        "placeholder": "your question",
-        "autofocus":True
+            "rows": "30",
+            "placeholder": "your question",
+            "autofocus": True
         }),
-        label= "Ask AI a question"
+        label="Ask AI a question"
     )
     model = forms.ChoiceField(
         choices=[
