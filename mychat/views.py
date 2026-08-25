@@ -32,8 +32,8 @@ def index(request):
                 )
 
                 # get answer and convert it using markdown libray
-                answer = completion.choices[0].message.content
-            md = markdown.Markdown(extensions=["fenced_code"])
+                answer = completion.choices[0].message.content or ""
+            md = markdown.Markdown(extensions=["fenced_code", "tables"])
             answer = md.convert(answer)
 
             return render(request, "mychat/index.html", {
