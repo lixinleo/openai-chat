@@ -37,5 +37,5 @@ Open your browser and navigate to:
 ```
 http://localhost:8066/mychat
 
-http://192.168.1.66:8066/mychat (only if you set your lan ip in .env)
+http://192.168.1.66:8066/mychat (if you set your lan ip in .env)
 ```
