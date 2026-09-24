@@ -33,7 +33,18 @@ def index(request):
 
                 # get answer and convert it using markdown libray
                 answer = completion.choices[0].message.content or ""
-            md = markdown.Markdown(extensions=["fenced_code", "tables"])
+            md = markdown.Markdown(
+                extensions=[
+                    "fenced_code",
+                    "tables",
+                    "pymdownx.arithmatex",
+                ],
+                extension_configs={
+                    "pymdownx.arithmatex": {
+                        "generic": True,
+                    }
+                },
+            )
             answer = md.convert(answer)
 
             return render(request, "mychat/index.html", {
