@@ -13,7 +13,7 @@ A simple chat web application built with Python Django and OpenAI API.
 
 Add your OpenAI API key:
 ```
-api_key="sk-proj-mZqgeW6JmcYAT3w4KIDpT3Bfdsfdfhsdhfhdsfhdsfhfh"
+OPENAI_API_KEY="sk-proj-mZqgeW6JmcYAT3w4KIDpT3Bfdsfdfhsdhfhdsfhdsfhfh"
 
 (optional to find lan ip of your local machine)
 my_lan_ip="192.168.1.66"

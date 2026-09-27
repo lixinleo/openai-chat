@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from .forms import ChatForm
 from openai import OpenAI
-import os
 import markdown
 
 # Create your views here.
@@ -11,7 +10,7 @@ def index(request):
         
         if form.is_valid():
             # set up an open api client
-            client = OpenAI(api_key=os.getenv("api_key"))
+            client = OpenAI()
             model=form.cleaned_data['model']
 
             if model == 'gpt-5.3-codex':
