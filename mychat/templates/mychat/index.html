@@ -64,7 +64,7 @@
   <button id="copyBtn" onclick="copyContent()">Append Answer to Question</button>
   <div id="answer-section">
     <h2>Answer from AI ({{ model }})</h2>
-    <p>{{ answer|safe }}</p>
+    <div class="answer-content">{{ answer }}</div>
   </div>
 </div>
 {% endif %}

@@ -3,3 +3,4 @@ openai==2.32.0
 python-dotenv==1.2.1
 markdown==3.9
 pymdown-extensions==10.21.3
+bleach==6.2.0
