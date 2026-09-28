@@ -48,6 +48,11 @@
     <div class="spinner"></div>
   </div>
   
+  {% if error %}
+  <div class="error-message" role="alert">
+    {{ error }}
+  </div>
+  {% endif %}
   <form action="" method="POST" id="chatForm">
     
     {% csrf_token %}
@@ -55,6 +60,12 @@
       {{ form.model }}</div>
     <div class="form-control">{{ form.question.label_tag }}
       {{ form.question }}</div>
+
+    {% if form.errors %}
+    <div class="form-errors" role="alert">
+      {{ form.errors }}
+    </div>
+    {% endif %}
 
     <button type="submit">Send</button>
     <button type="button" id="clearBtn" onclick="clearContent()">Clear</button>

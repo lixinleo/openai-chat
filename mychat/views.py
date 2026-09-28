@@ -4,6 +4,9 @@ from openai import OpenAI
 import markdown
 import bleach
 from django.utils.safestring import mark_safe
+import logging
+
+logger = logging.getLogger(__name__)
 
 ALLOWED_TAGS = {
     "p", "br",
@@ -60,46 +63,44 @@ def markdown_to_safe_html(value):
 
 # Create your views here.
 def index(request):
-    if request.method == "POST":
-        form = ChatForm(request.POST, request=request)
+    form = ChatForm(request.POST or None, request=request)
+    if request.method == "POST" and form.is_valid():
+        # set up an open api client
+        client = OpenAI()
+        model=form.cleaned_data['model']
         
-        if form.is_valid():
-            # set up an open api client
-            client = OpenAI()
-            model=form.cleaned_data['model']
+        # customize instructions for individual models.
+        instructions_by_model = {
+            "gpt-5.3-codex": "You are a helpful coding assistant.",
+        }
 
-            if model == 'gpt-5.3-codex':
-                response = client.responses.create(
-                                model="gpt-5.3-codex",
-                                instructions="You are a coding assistant.",
-                                input=form.cleaned_data['question'],
-                            )
+        instructions = instructions_by_model.get(model, "You are a helpful assistant.")
 
-                answer = (response.output_text)
-            else:
-                completion = client.chat.completions.create(
-                    model=model,
-                    messages=[
-                        {"role": "user", "content": form.cleaned_data['question']}
-                        ],
-                    n=1,
-                )
-
-                # get answer and convert it using markdown libray
-                answer = completion.choices[0].message.content or ""
-            
-            answer = markdown_to_safe_html(answer)
-
+        try:
+            response = client.responses.create(
+                            model=model,
+                            instructions=instructions,
+                            input=form.cleaned_data['question'],
+                        )
+            answer = markdown_to_safe_html(response.output_text)
             return render(request, "mychat/index.html", {
                 "form": form,
                 "answer": answer,
-                "model": form.cleaned_data['model'],
-            })
-        else:
-            print("not valid send me haha")
-    else:
-        form = ChatForm(request=request)
-        return render(request, "mychat/index.html", {
-            "form": form
-        })
+                "model": model,
+            })  
+        except Exception:
+            logger.exception("Error while processing the request")
+            return render(
+                request,
+                "mychat/index.html",
+                {
+                    "form": form,
+                    "error": "An error occurred while processing your request.",
+                },
+                status=500,
+            )
+        
+    return render(request, "mychat/index.html", {
+        "form": form
+    })
     
